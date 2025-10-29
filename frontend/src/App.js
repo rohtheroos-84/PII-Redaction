@@ -4,6 +4,7 @@ import styles from './App.module.css';
 import FileUpload from './components/FileUpload';
 import ProcessingView from './components/ProcessingView';
 import DownloadView from './components/DownloadView';
+import { uploadToIngest, waitForRedacted } from './aws/s3Helpers';
 
 function App() {
   const [appState, setAppState] = useState('idle'); // 'idle', 'processing', 'complete'
@@ -20,21 +21,31 @@ function App() {
     if (!selectedFile) return;
 
     setAppState('processing');
-    
-    const formData = new FormData();
-    formData.append('file', selectedFile);
 
-    console.log('Simulating API call with file:', selectedFile.name);
+    try {
+      const ingestBucket = process.env.REACT_APP_INGEST_BUCKET;
+      const redactedBucket = process.env.REACT_APP_REDACTED_BUCKET;
 
-    await new Promise(resolve => setTimeout(resolve, 3000));
+      if (!ingestBucket || !redactedBucket) {
+        throw new Error('Missing REACT_APP_INGEST_BUCKET or REACT_APP_REDACTED_BUCKET in .env.local');
+      }
 
-    const mockFileBlob = new Blob(["This is the redacted content"], { type: "text/plain" });
-    const mockUrl = URL.createObjectURL(mockFileBlob);
+  // Upload the file to the ingest bucket. Returns fileName and key.
+  const { fileName } = await uploadToIngest(ingestBucket, selectedFile);
 
-    console.log('API call complete. Mock download URL created.');
-    
-    setDownloadLink(mockUrl);
-    setAppState('complete');
+  // Poll the redacted bucket for the job's output using the filename
+  const { text } = await waitForRedacted(redactedBucket, fileName, { maxAttempts: 30, initialDelayMs: 1000 });
+
+      // Create a blob URL so the UI can download/display the redacted content
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      setDownloadLink(url);
+      setAppState('complete');
+    } catch (err) {
+      console.error('Redaction flow error:', err);
+      alert('Error during upload/polling: ' + err.message);
+      setAppState('idle');
+    }
   };
 
   const handleReset = () => {
