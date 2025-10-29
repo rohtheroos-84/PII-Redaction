@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .iconWrapper {
+      margin-bottom: 1.5rem;
+      animation: bounceIn 0.8s ease-out forwards; /* Apply entrance bounce animation */
+  }
+  
+  .iconWrapper svg {
+    color: var(--success-color-start); /* Use the start color for vibrancy */
+  }
+  
+  /* Keyframe animation for the success icon */
+  @keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+  }
+  
+  
+  .title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+  }
+  
+  .text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    gap: 1rem;
+  }
+  
+  .downloadButton, .resetButton {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    text-decoration: none; /* For the <a> tag */
+    display: flex; /* For centering text in anchor */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .downloadButton {
+    color: #fff;
+    background-image: linear-gradient(to right, var(--success-color-start) 0%, var(--success-color-end) 50%, var(--success-color-start) 100%);
+  }
+  
+  .downloadButton:hover {
+    background-image: linear-gradient(to right, var(--success-color-end) 0%, #218838 50%, var(--success-color-end) 100%);
+    transform: translateY(-4px) scale(1.02);
+  }
+  
+  .resetButton {
+    color: var(--text-primary);
+    background-image: linear-gradient(to right, rgba(50,50,50,0.8) 0%, rgba(30,30,30,0.8) 50%, rgba(50,50,50,0.8) 100%);
+    border: 1px solid var(--border-color);
+  }
+  
+  .resetButton:hover {
+    background-image: linear-gradient(to right, rgba(70,70,70,0.9) 0%, rgba(50,50,50,0.9) 50%, rgba(70,70,70,0.9) 100%);
+    border-color: var(--text-secondary);
+    transform: translateY(-4px) scale(1.02);
+  }

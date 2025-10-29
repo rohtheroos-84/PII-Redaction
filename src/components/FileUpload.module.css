@@ -1,0 +1,155 @@
+.container {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .dropZone {
+    width: 100%;
+    padding: 3rem;
+    border-radius: 12px;
+    border: 2px dashed var(--border-color);
+    background-color: var(--background-secondary);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out; /* Smoother transitions */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle initial shadow */
+    position: relative; /* For hover effect */
+    overflow: hidden; /* Clip pseudo-element */
+  }
+  
+  /* Hover effect for dropZone */
+  .dropZone:hover {
+    border-color: var(--accent-color-start); /* More vibrant border on hover */
+    background-color: rgba(0, 0, 0, 0.028); /* Slightly darker, more transparent */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+    transform: translateY(-3px); /* Slight lift */
+  }
+  
+  /* Pseudo-element for a subtle, internal glossy highlight on hover */
+  .dropZone:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 50%);
+    transition: opacity 0.3s ease;
+    opacity: 1;
+  }
+  
+  .dragActive {
+    border-color: var(--accent-color-start);
+    background-color: rgba(40, 40, 40, 0.8);
+    transform: scale(1.02); /* More noticeable scale */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  }
+  .dragActive::before { /* Add highlight for drag active */
+      opacity: 1;
+  }
+  
+  
+  .dropZone svg {
+    color: var(--accent-color-start);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .dropZone:hover svg {
+      transform: translateY(-5px); /* Icon lifts slightly on hover */
+  }
+  
+  .dropZoneText {
+    margin: 0;
+    font-size: 1.15rem; /* Slightly larger */
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+  
+  .dropZoneSubText {
+    margin: 0.25rem 0 0 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+  
+  .dropZoneSupport {
+    margin: 1rem 0 0 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+  }
+  
+  .hiddenInput {
+    display: none;
+  }
+  
+  .filePreview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background-color: var(--background-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .filePreview svg {
+    color: var(--accent-color-start); /* Make file icon more vibrant */
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+  }
+  
+  .fileName {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+  }
+  
+  .removeFileButton {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.8rem; /* Larger for better tap target */
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 0 0 1rem;
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  }
+  
+  .removeFileButton:hover {
+    color: var(--text-primary);
+    transform: scale(1.1); /* Pop on hover */
+  }
+  
+  /* Redact button with glossy gradient */
+  .redactButton {
+    width: 100%;
+    padding: 1rem 1.5rem; /* Slightly more padding */
+    font-size: 1.1rem;
+    color: #fff;
+    background-image: linear-gradient(to right, var(--accent-color-start) 0%, var(--accent-color-end) 50%, var(--accent-color-start) 100%);
+  }
+  
+  .redactButton:hover {
+    background-image: linear-gradient(to right, var(--accent-color-hover-start) 0%, var(--accent-color-hover-end) 50%, var(--accent-color-hover-start) 100%);
+    transform: translateY(-4px) scale(1.02); /* More pronounced lift and scale */
+  }
+  
+  .redactButton:disabled {
+    background-image: none; /* Remove gradient when disabled */
+    background-color: var(--border-color);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+    transform: none; /* No lift when disabled */
+  }

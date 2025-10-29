@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+:root {
+  /* Glossy Dark Theme */
+  --background-primary-start: #060916; /* Deep blue/purple start */
+  --background-primary-end: #2c213a;   /* Darker purple end */
+  --background-secondary: rgba(6, 29, 28, 0.346); /* Slightly transparent for depth */
+  --border-color: rgba(70, 70, 70, 0.4); /* Softer, slightly transparent border */
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+
+  /* Glossy Accent Colors */
+  --accent-color-start: #6dd5ed; /* Lighter blue */
+  --accent-color-end: #2193b0;   /* Deeper blue */
+  --accent-color-hover-start: #040f35; /* Slightly darker */
+  --accent-color-hover-end: #007bff;   /* Even darker blue */
+
+  --success-color-start: #4CAF50; /* Green start */
+  --success-color-end: #2E7D32;   /* Darker green end */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Glossy Gradient Background */
+  background: linear-gradient(135deg, var(--background-primary-start) 0%, var(--background-primary-end) 100%);
+  background-attachment: fixed; /* Ensures gradient stays put */
+  
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Base styles for glossy buttons/elements */
+.glossy-button {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out; /* Smooth transitions for all properties */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle lift */
+  background-size: 200% auto; /* For gradient animation */
+}
+
+.glossy-button:hover {
+  box-shadow: 0 6px 20px rgba(34, 6, 19, 0.477);
+  transform: translateY(-2px); /* Slight lift on hover */
+  background-position: right center; /* Animate gradient */
+}
